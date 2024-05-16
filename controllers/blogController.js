@@ -5,8 +5,7 @@ const User = require('../models/user');
 //upload blog
 const uploadBlog = async (req, res) => {
     try {
-        const { title, content } = req.body;
-        const imagePath = req.file.path;
+        const { title, content,image } = req.body;
         const userId = req.id;
         const user = await User.findById(userId)
         if (!user) {
@@ -20,7 +19,7 @@ const uploadBlog = async (req, res) => {
         const newBlog = await Blog.create({
             title,
             content,
-            image:imagePath,
+            image,
             author:user.name,
             user: userId
         });
