@@ -16,13 +16,15 @@ const uploadBlog = async (req, res) => {
         }
 
         // Create a new blog post
-        const newBlog = await Blog.create({
+        const newBlog = new Blog({
             title,
             content,
             image,
             author:user.name,
             user: userId
         });
+
+        await newBlog.save()
 
 
         res.status(201).json({
